@@ -43,7 +43,7 @@ namespace Zehong.CSharp.Solution.ExpressionParser
             if (Regex.IsMatch(nextMatch.Value, @"[([{]"))
             {
               var subExpression = Helper.GetSubExpression(strExpression);
-              var unit = NumericCalculator.Parse(subExpression);
+              var unit = ExpressionHandler.Parse(subExpression);
               if (unit == null)
                 return Double.NaN;
 
@@ -67,7 +67,7 @@ namespace Zehong.CSharp.Solution.ExpressionParser
             else // must be a complex unit
             {
               var subExpression = Helper.GetSubExpression(strExpression);
-              var unit = NumericCalculator.Parse(subExpression);
+              var unit = ExpressionHandler.Parse(subExpression);
               if (unit == null)
                 return Double.NaN;
               _unitList.Add(unit);
@@ -85,6 +85,8 @@ namespace Zehong.CSharp.Solution.ExpressionParser
         {
           if (Double.IsNaN(value))
             value = _unitList[i].Compute();
+          if (Double.IsNaN(value))
+            return Double.NaN;
           if (_operatorList[i] == "*" || _operatorList[i] == "/" || _operatorList[i] == "%")
           {
             if (_operatorList[i] == "*")

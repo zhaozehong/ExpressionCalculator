@@ -22,7 +22,7 @@ namespace Zehong.CSharp.Solution.ExpressionParser
         var parameters = GetParameterStrings(this.Expression);
         foreach (var parameter in parameters)
         {
-          var unit = NumericCalculator.Parse(parameter);
+          var unit = ExpressionHandler.Parse(parameter);
           if (unit == null)
             return Double.NaN;
           _unitList.Add(unit);

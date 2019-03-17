@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Zehong.CSharp.Solution.ExpressionParser
 {
@@ -13,7 +11,7 @@ namespace Zehong.CSharp.Solution.ExpressionParser
       while (true)
       {
         Console.WriteLine("Please enter any mathematical expression:");
-        var strExpression = Console.ReadLine();
+        var strExpression = Regex.Replace(Console.ReadLine(), " ", "");
         if (strExpression.ToLower() == "exit")
           break;
 
@@ -25,11 +23,11 @@ namespace Zehong.CSharp.Solution.ExpressionParser
         foreach (var variableName in handler.VariableNames)
         {
           Console.WriteLine(String.Format("Please enter value for [{0}]:", variableName));
-          var variableValue = Console.ReadLine();
+          var variableValue = Regex.Replace(Console.ReadLine(), " ", "").TrimStart('+');
           while (!Helper.IsNumericValue(variableValue))
           {
             Console.WriteLine("Please enter a VALID value!!!");
-            variableValue = Console.ReadLine();
+            variableValue = Regex.Replace(Console.ReadLine(), " ", "").TrimStart('+');
           }
           variableValues.Add(variableValue);
         }
