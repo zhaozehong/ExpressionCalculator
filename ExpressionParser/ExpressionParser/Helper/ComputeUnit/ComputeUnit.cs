@@ -10,7 +10,7 @@ namespace Zehong.CSharp.Solution.ExpressionParser
   {
     public ComputeUnit(String strExpression)
     {
-      this.Expression = NumericCalculator.Normalize(strExpression);
+      this.Expression = ExpressionHandler.Normalize(strExpression);
     }
 
     public abstract double Compute();

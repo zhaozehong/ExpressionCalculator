@@ -13,6 +13,10 @@ namespace Zehong.CSharp.Solution.ExpressionParser
     {
       return Regex.IsMatch(strValue, @"^-?\d+\.?\d*$");
     }
+    public static Boolean IsEmail(String strValue)
+    {
+      return Regex.IsMatch(strValue, @"^\s*([A-Za-z\d]+[\.\w-]*@([A-Za-z\d]+[\w-]*\.)+[A-Za-z]{2,})\s*$");
+    }
     public static String GetSubExpression(String strExpression)
     {
       if (String.IsNullOrWhiteSpace(strExpression))
