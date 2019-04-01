@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Zehong.CSharp.Solution.ExpressionParser
+namespace Solution.ExpressionCalculator
 {
   public abstract class ComputeUnit : IComputeUnit
   {
     public ComputeUnit(String strExpression)
     {
-      this.Expression = ExpressionHandler.Normalize(strExpression);
+      this.Expression = NumericCalculator.Normalize(strExpression);
     }
 
     public abstract double Compute();

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace Zehong.CSharp.Solution.ExpressionParser
+namespace Solution.ExpressionCalculator
 {
   public enum ComplexFunctions { None = 0, Max, Min, Average, Ave, Sum, Pow, Atan2, LogX, BigMul, IEEERemainder }
   public class ComplexUnit : ComputeUnit
@@ -22,7 +20,7 @@ namespace Zehong.CSharp.Solution.ExpressionParser
         var parameters = GetParameterStrings(this.Expression);
         foreach (var parameter in parameters)
         {
-          var unit = ExpressionHandler.Parse(parameter);
+          var unit = NumericCalculator.Parse(parameter);
           if (unit == null)
             return Double.NaN;
           _unitList.Add(unit);

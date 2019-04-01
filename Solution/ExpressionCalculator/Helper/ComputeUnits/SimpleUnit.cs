@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace Zehong.CSharp.Solution.ExpressionParser
+namespace Solution.ExpressionCalculator
 {
   public enum SimpleFunctions { None, Abs, Sqrt, Ceiling, Floor, Truncate, Sign, Log, Log10, Sin, Cos, Tan, Sinh, Cosh, Tanh, Asin, Acos, Atan }
   public class SimpleUnit : ComputeUnit
@@ -43,7 +41,7 @@ namespace Zehong.CSharp.Solution.ExpressionParser
             if (Regex.IsMatch(nextMatch.Value, @"[([{]"))
             {
               var subExpression = Helper.GetSubExpression(strExpression);
-              var unit = ExpressionHandler.Parse(subExpression);
+              var unit = NumericCalculator.Parse(subExpression);
               if (unit == null)
                 return Double.NaN;
 
@@ -67,7 +65,7 @@ namespace Zehong.CSharp.Solution.ExpressionParser
             else // must be a complex unit
             {
               var subExpression = Helper.GetSubExpression(strExpression);
-              var unit = ExpressionHandler.Parse(subExpression);
+              var unit = NumericCalculator.Parse(subExpression);
               if (unit == null)
                 return Double.NaN;
               _unitList.Add(unit);
@@ -85,8 +83,6 @@ namespace Zehong.CSharp.Solution.ExpressionParser
         {
           if (Double.IsNaN(value))
             value = _unitList[i].Compute();
-          if (Double.IsNaN(value))
-            return Double.NaN;
           if (_operatorList[i] == "*" || _operatorList[i] == "/" || _operatorList[i] == "%")
           {
             if (_operatorList[i] == "*")
@@ -104,8 +100,6 @@ namespace Zehong.CSharp.Solution.ExpressionParser
             }
             continue;
           }
-          if (Double.IsNaN(value))
-            return Double.NaN;
           if (operators.Any() && operators.Last() == "-")
             value *= -1;
           values.Add(value);

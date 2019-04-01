@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace Zehong.CSharp.Solution.ExpressionParser
+namespace Solution.ExpressionCalculator
 {
   public static class Helper
   {
     public static Boolean IsNumericValue(String strValue)
     {
       return Regex.IsMatch(strValue, @"^-?\d+\.?\d*$");
-    }
-    public static Boolean IsEmail(String strValue)
-    {
-      return Regex.IsMatch(strValue, @"^\s*([A-Za-z\d]+[\.\w-]*@([A-Za-z\d]+[\w-]*\.)+[A-Za-z]{2,})\s*$");
     }
     public static String GetSubExpression(String strExpression)
     {
