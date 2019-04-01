@@ -102,6 +102,8 @@ namespace Zehong.CSharp.Solution.ExpressionParser
             }
             continue;
           }
+          if (Double.IsNaN(value))
+            return Double.NaN;
           if (operators.Any() && operators.Last() == "-")
             value *= -1;
           values.Add(value);
